@@ -27,19 +27,19 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img src="https://ui-avatars.com/api/?name=Andrew" alt="avatar" width="32" height="32" class="rounded-circle">
+                        <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}" alt="avatar" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <h6 class="dropdown-header">Andrew</h6>
+                            <h6 class="dropdown-header">{{ Auth::user()->name}}</h6>
                         </li>
                         <li>
-                            <h6 class="dropdown-header">Role: Admin</h6>
+                            <h6 class="dropdown-header">Role: {{ (Auth::user()->isadmin) ? 'Admin' : 'User' }}</h6>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
                     </ul>
                 </li>
             </ul>
