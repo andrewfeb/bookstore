@@ -22,7 +22,8 @@ Route::middleware('auth')->group(function(){
 
     Route::resources([
         'genres' => GenresController::class,
-        'publishers' => PublishersController::class,
         'books' => BooksController::class
     ]);
+
+    Route::resource('publishers', PublishersController::class)->middleware('isadmin:true');
 });
