@@ -11,7 +11,9 @@
 
 <body>
     <!-- HEADER -->
+    @auth
     <x-navigation />
+    @endauth
     <!-- CONTENT -->
     <div class="container my-4">
         <div class="card">
