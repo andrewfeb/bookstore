@@ -1,0 +1,56 @@
+<?php
+
+use App\Http\Controllers\BooksController;
+use Illuminate\Support\Facades\Route;
+use App\Oop\Book;
+//use App\Controller\CategoryBook as CategoryController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('oop', function() {
+    $category = new Book('novel');
+    // echo $category->getCategory() . '</br>';
+    $category->setCategory('Fiksi');
+    echo $category->getCategory() . '</br>';
+    echo $category->read();
+    //echo $category->genre();
+});
+
+// https://namadomain/controller/action/parameter :CodeIgniter
+// https://namadomain/url/parameter: Laravel
+// data:controller / url
+// {nama}: parameter / querystring
+Route::get('data/{nama}', function ($nama) {
+    return 'Nama saya: '. $nama;
+});
+
+Route::get('data/kota/{kota?}', function ($kota = '') {
+    return 'Kota: '. $kota;
+});
+
+Route::get('login', function(){
+    return 'LOGIN';
+})->name('login');
+
+Route::get('book', [BooksController::class, 'index'])->name('book.index');
+
+Route::get('book/{id}',[BooksController::class, 'detail'])->name('book.detail')->middleware('auth');
+
+// Route::middleware('auth')->group(function(){
+//     Route::get('book', [BooksController::class, 'index'])->name('book.index');
+
+//     Route::get('book/{id}',[BooksController::class, 'detail'])->name('book.detail');
+// });

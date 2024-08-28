@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class BooksController extends Controller
+{
+    public function index()
+    {
+        return 'Index Buku';
+    }
+
+    public function detail($id)
+    {
+        $view = 'Detail Buku ID '.$id.'</br>'.
+            '<a href="'.route('book.index').'">Kembali</a> '. route('book.detail', $id);
+
+        return $view;
+    }
+}
