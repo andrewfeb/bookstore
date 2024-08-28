@@ -17,6 +17,11 @@ class IsAdmin
     public function handle(Request $request, Closure $next, bool $isadmin): Response
     {
         abort_unless(Auth::user()->isadmin == $isadmin, 401);
+        // if (Auth::user()->isadmin !== $isadmin) {
+        //     abort(401);
+        // }
+
+        //abort_if(Auth::user()->isadmin !== $isadmin, 401);
 
         return $next($request);
     }

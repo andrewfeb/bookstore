@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Interface\IGenres;
 use App\Models\Genre;
 use Exception;
 use Illuminate\Http\Request;
 
-class GenresController extends Controller
+class GenresController extends Controller implements IGenres
 {
     /**
      * Display a listing of the resource.
@@ -30,10 +31,7 @@ class GenresController extends Controller
         return view('genre.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    private function validation(Request $request)
     {
         $request->validate([
             'nama-genre' => 'required|min:3'
@@ -41,6 +39,13 @@ class GenresController extends Controller
             'nama-genre.required' => 'Nama genre harus diisi',
             'nama-genre.min' => 'Nama genre minimal 3 karakter'
         ]);
+    }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $this->validation($request);
         try{
             Genre::create([
                 'genre' => $request->input('nama-genre')
@@ -75,12 +80,7 @@ class GenresController extends Controller
      */
     public function update(Request $request, Genre $genre)
     {
-        $request->validate([
-            'nama-genre' => 'required|min:3'
-        ],[
-            'nama-genre.required' => 'Nama genre harus diisi',
-            'nama-genre.min' => 'Nama genre minimal 3 karakter'
-        ]);
+        $this->validation($request);
         try{
             $genre->update([
                 'genre' => $request->input('nama-genre')
