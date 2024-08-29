@@ -18,13 +18,12 @@ return new class extends Migration
             $table->string('author');
             $table->date('publish_date');
             $table->unsignedInteger('publisher_id');
-            $table->unsignedInteger('genre_id');
             $table->string('cover');
+            $table->string('price');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('publisher_id')->references('id')->on('publishers');
-            $table->foreign('genre_id')->references('id')->on('genres');
         });
     }
 

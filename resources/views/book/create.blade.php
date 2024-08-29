@@ -2,7 +2,7 @@
     <div class="mb-3">
         <h3>Add Book</h3>
     </div>
-    <form method="POST" action="{{ route('books.store') }}">
+    <form method="POST" action="{{ route('books.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -43,7 +43,9 @@
             <div class="col-md-6">
                 <label for="publisher" class="form-label">Publisher</label>
                 <select class="form-select @error('publisher') is-invalid @enderror" name="publisher">
-                    <option>Select</option>
+                    @foreach ($publishers as $item)
+                        <option value="{{ $item->id }}">{{ $item->publisher }}</option>
+                    @endforeach
                 </select>
                 @error('publisher')
                     <span class="invalid-feedback">{{ $message }}</span>
@@ -54,8 +56,9 @@
             <div class="col-md-6">
                 <label for="genre" class="form-label">Genre</label>
                 <select class="form-select @error('genre') is-invalid @enderror" name="genre[]" multiple>
-                    <option>Fantasy</option>
-                    <option>Horror</option>
+                    @foreach ($genres as $item)
+                        <option value="{{ $item->id }}">{{ $item->genre }}</option>
+                    @endforeach
                 </select>
                 @error('genre')
                     <span class="invalid-feedback">{{ $message }}</span>

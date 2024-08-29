@@ -53,7 +53,7 @@ class GenresController extends Controller implements IGenres
 
             return to_route('genres.index')->with('success', 'Data genre berhasil disimpan');
         }catch(Exception $e) {
-            return to_route('genres.index')->with('error', $e->getMessage()());
+            return to_route('genres.index')->with('error', $e->getMessage());
         }
     }
 
